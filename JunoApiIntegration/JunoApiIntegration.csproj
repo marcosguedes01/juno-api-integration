@@ -2,7 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
+    <Title>Juno Integration API - MJGJ</Title>
+    <Description>Api de Integração com a plataforma Juno</Description>
+    <RepositoryUrl>https://github.com/marcosguedes01/juno-api-integration</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/marcosguedes01/juno-api-integration</PackageProjectUrl>
+    <PackageTags>Juno</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>- Geração de Token de Autenticação
+- Consulta de Saldo
+- Consulta de boletos gerados
+- Geração de novos boletos
+- Cancelamento de boletos</PackageReleaseNotes>
+    <Authors>Marcos Guedes</Authors>
   </PropertyGroup>
 
   <ItemGroup>
