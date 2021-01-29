@@ -32,7 +32,7 @@ namespace JunoApiIntegration
             return await client.GetAsync<ChargeResponse>(request);
         }
 
-        public async Task<BillingBillResponse> GenerateBillingBillAsync(ChargeRequest body)
+        public async Task<IBillingBillResponse> GenerateBillingBillAsync(ChargeRequest body)
         {
             var request = new RestRequest("charges", DataFormat.Json)
                 .AddJsonBody(JsonConvert.SerializeObject(body));
@@ -40,7 +40,24 @@ namespace JunoApiIntegration
             request.AddHeader("X-Api-Version", "2");
             request.AddHeader("X-Resource-Token", _privateToken);
 
-            return await client.PostAsync<BillingBillResponse>(request);
+            var response = await client.PostAsync<BillingBillResponse>(request);
+
+            if (response.Embedded != null)
+            {
+                return new BillingBillResponseSuccess
+                {
+                    Embedded = response.Embedded
+                };
+            }
+
+            return new BillingBillResponseError
+            {
+                Details = response.Details,
+                Error = response.Error,
+                Path = response.Path,
+                Status = response.Status,
+                Timestamp = response.Timestamp
+            };
         }
 
         public async Task<bool> CancelBillingBillAsync(string chargeId)

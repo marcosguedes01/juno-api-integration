@@ -1,5 +1,6 @@
 ﻿using JunoApiIntegration;
 using JunoApiIntegration.Requests;
+using JunoApiIntegration.Responses;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -68,16 +69,26 @@ namespace JunoApiIntegrationTest
                 Billing = new Billing
                 {
                     Name = "Joao da Silva Sauro",
-                    Document = "17849259939",
+                    Document = "82738475589",
                     Email = "joao.silva.sauro@gmail.com",
                     Phone = "+5581732141290",
-                    BirthDate = "1968-03-21",
-                    Notify = true
+                    //BirthDate = "1968-03-21",
+                    Notify = false
                 }
             };
             var chargeResponse = await charge.GenerateBillingBillAsync(body);
 
-            Assert.NotNull(chargeResponse);
+            if (chargeResponse is BillingBillResponseSuccess)
+            {
+                Assert.NotNull(((BillingBillResponseSuccess)chargeResponse).Embedded);
+            }
+            else if (chargeResponse is BillingBillResponseError)
+            {
+                Assert.NotNull(((BillingBillResponseError)chargeResponse).Error);
+                Assert.NotEmpty(((BillingBillResponseError)chargeResponse).Error);
+            }
+
+            Assert.NotNull(null);
         }
 
         [Fact]

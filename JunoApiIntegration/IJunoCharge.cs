@@ -8,7 +8,7 @@ namespace JunoApiIntegration
     {
         Task<ChargeListResponse> GetCharges();
         Task<ChargeResponse> GetCharge(string chargeId);
-        Task<BillingBillResponse> GenerateBillingBillAsync(ChargeRequest body);
+        Task<IBillingBillResponse> GenerateBillingBillAsync(ChargeRequest body);
         Task<bool> CancelBillingBillAsync(string chargeId);
     }
 }
