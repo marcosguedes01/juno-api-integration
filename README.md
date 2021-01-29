@@ -67,6 +67,15 @@ var body = new ChargeRequest
     }
 };
 var chargeResponse = await charge.GenerateBillingBillAsync(body);
+
+if (chargeResponse is BillingBillResponseSuccess)
+{
+    var success = chargeResponse as BillingBillResponseSuccess;
+}
+else if (chargeResponse is BillingBillResponseError)
+{
+    var error = chargeResponse as BillingBillResponseError;
+}
 ```
 
 ### Cancelar boleto gerado
